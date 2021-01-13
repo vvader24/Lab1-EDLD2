@@ -58,8 +58,14 @@ data %>%
 ```{r}
 #Fig2
 data <- data %>%
-  mutate(month = round_date(data$created_at,
+  mutate(month = round_date(data$created_at, # adding month variable
                             unit = "month"))
+data <- data %>% 
+  group_by(month) %>% 
+  mutate(n = n()) # create count variable
+
+data %>% 
+  select(month, n) # taking a look
   
 ```
 
