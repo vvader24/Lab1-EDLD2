@@ -26,13 +26,13 @@ library(nFactors)
 library(Matrix)
 library(ggplot2)
 library(lubridate)
-here()
+here::here()
 
 
 ```
 
 ```{r}
-data = import(here("data", "rstats_tweets.rds"), setclass = "tb_df") %>% 
+data = import(here::here("data", "rstats_tweets.rds"), setclass = "tb_df") %>% 
   characterize() %>% 
   clean_names()
 
