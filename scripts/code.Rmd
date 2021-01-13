@@ -32,7 +32,7 @@ here::here()
 ```
 
 ```{r}
-data = import(here("data", "rstats_tweets.rds"), setclass = "tb_df") %>% 
+data = import(here::here("data", "rstats_tweets.rds"), setclass = "tb_df") %>% 
   characterize() %>% 
   clean_names()
 
