@@ -66,6 +66,12 @@ data <- data %>%
 
 data %>% 
   select(month, n) # taking a look
+
+data %>% 
+  ggplot(aes(x = month, y = n)) +
+  geom_line() +
+  geom_smooth()
+  
   
 ```
 
