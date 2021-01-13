@@ -76,7 +76,12 @@ data_short %>%
   labs(x = "Twitter Screen Name",
        y = "Count",
        title = "Most prolific #rstats tweeters",
-       subtitle = "Top 25 screennames displayed")
+       subtitle = "Top 25 screennames displayed") +
+  theme_set(theme_minimal())+
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = calc_element("panel.grid.major.y", theme_get())
+  )
 ```
 
 
