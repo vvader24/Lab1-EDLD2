@@ -54,3 +54,12 @@ data %>%
   coord_flip()
 ```
 
+
+```{r}
+#Fig2
+data %>% 
+  #do stuff here! 
+  
+```
+
+
