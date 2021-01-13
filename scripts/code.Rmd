@@ -65,6 +65,11 @@ data_short %>%
 
 ## Figure 1 Version 2
 
+```{r}
+
+```
+
+
 ## Figure 2 Version 1
 
 ## Figure 2 Version 2
