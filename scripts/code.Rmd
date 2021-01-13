@@ -70,8 +70,8 @@ data %>%
 data %>% 
   ggplot(aes(x = month, y = n)) +
   geom_line() +
-  geom_smooth()
-  
+  geom_smooth() +
+  xlim(as_datetime("2008-09-01 00:00:00"), as_datetime("2018-12-31 00:00:00"))
   
 ```
 
