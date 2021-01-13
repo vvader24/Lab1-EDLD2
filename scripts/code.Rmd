@@ -3,6 +3,8 @@ title: "Lab 1"
 author: "vinita vader"
 date: "1/5/2021"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 ```{r setup, include=FALSE}
 options(Encoding="UTF-8")
@@ -19,7 +21,7 @@ library(here)
 library(janitor)
 library(stringr)
 library(forcats)
-library(bootnet)
+#library(bootnet)
 library(qgraph)
 library(igraph)
 library(psych)
@@ -30,6 +32,8 @@ here()
 
 
 ```
+
+## Figure 1 Version 1
 
 ```{r}
 data = import(here("data", "rstats_tweets.rds"), setclass = "tb_df") %>% 
@@ -42,15 +46,31 @@ head(data, 3)
 ```
 
 ```{r}
-data %>% 
+# Creating reordered rows
+data_ordered <- data %>% 
   select(screen_name) %>%
   group_by(screen_name) %>% 
   count() %>% 
-  arrange(desc(n)) %>% 
-  data_frame() %>% 
-  slice(1:25) %>% 
-  ggplot(aes(x = fct_reorder(screen_name), y = n))+
+  arrange(desc(n)) 
+
+data_short <- data_ordered %>% 
+  as_tibble() %>% 
+  dplyr::slice(1:25)
+
+data_short %>% 
+  ggplot(aes(x = fct_reorder(screen_name, n), y = n))+
   geom_bar(stat = "identity")+
   coord_flip()
 ```
+
+## Figure 1 Version 2
+
+```{r}
+
+```
+
+
+## Figure 2 Version 1
+
+## Figure 2 Version 2
 
