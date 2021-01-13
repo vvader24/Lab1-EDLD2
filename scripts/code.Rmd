@@ -19,13 +19,13 @@ library(here)
 library(janitor)
 library(stringr)
 library(forcats)
-library(bootnet)
 library(qgraph)
 library(igraph)
 library(psych)
 library(nFactors)
 library(Matrix)
 library(ggplot2)
+library(lubridate)
 here()
 
 
@@ -57,8 +57,9 @@ data %>%
 
 ```{r}
 #Fig2
-data %>% 
-  #do stuff here! 
+data <- data %>%
+  mutate(month = round_date(data$created_at,
+                            unit = "month"))
   
 ```
 
