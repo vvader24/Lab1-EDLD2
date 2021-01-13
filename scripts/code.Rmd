@@ -61,12 +61,23 @@ data_short %>%
   ggplot(aes(x = fct_reorder(screen_name, n), y = n))+
   geom_bar(stat = "identity")+
   coord_flip()
+
+
 ```
 
 ## Figure 1 Version 2
 
 ```{r}
 
+data_short %>% 
+  ggplot(aes(x = fct_reorder(screen_name, n), y = n))+
+  geom_bar(stat = "identity")+
+  coord_flip()+
+  labs(x = "Twitter Screen Name",
+       y = "Count",
+       title = "Most prolific #rstats tweeters",
+       subtitle = "Top 25 screennames displayed")+
+  theme_minimal()
 ```
 
 
