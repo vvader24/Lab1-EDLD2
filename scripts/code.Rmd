@@ -21,14 +21,15 @@ library(here)
 library(janitor)
 library(stringr)
 library(forcats)
-#library(bootnet)
+library(bootnet)
 library(qgraph)
 library(igraph)
 library(psych)
 library(nFactors)
 library(Matrix)
 library(ggplot2)
-here()
+library(lubridate)
+here::here()
 
 
 ```
@@ -36,12 +37,12 @@ here()
 ## Figure 1 Version 1
 
 ```{r}
-data = import(here("data", "rstats_tweets.rds"), setclass = "tb_df") %>% 
+data = import(here::here("data", "rstats_tweets.rds"), setclass = "tb_df") %>% 
   characterize() %>% 
   clean_names()
 
-names(data)
-head(data, 3)
+#names(data)
+#head(data, 3)
 
 ```
 
@@ -88,4 +89,41 @@ data_short %>%
 ## Figure 2 Version 1
 
 ## Figure 2 Version 2
+
+
+```{r}
+#Fig2
+data <- data %>%
+  mutate(month = round_date(data$created_at, # adding month variable
+                            unit = "month"))
+data <- data %>% 
+  group_by(month) %>% 
+  mutate(n = n()) # create count variable
+
+data %>% 
+  select(month, n) # taking a look
+
+data %>% 
+  ggplot(aes(x = month, y = n)) +
+  geom_line() +
+  geom_smooth() +
+  xlim(as_datetime("2008-09-01 00:00:00"), as_datetime("2018-12-31 00:00:00"))
+
+#Fig2.2  
+ggplot(data, aes(month, n)) +
+  geom_line(aes(y=n), color = "slategrey", size = 2) +
+  geom_ribbon(aes(ymin=0, ymax = n), fill = "grey89", alpha = 0.7) +
+  geom_smooth(color = "magenta") +
+  #geom_smooth(span = 1, se = FALSE, color = "magenta") +
+  xlim(as_datetime("2008-09-01 00:00:00"), as_datetime("2018-12-31 00:00:00"))+
+  theme_minimal() +
+  labs(y = "Number of #rstats tweets",
+       x = "Year (data summarized by month)",
+       title = "Growth of the #rstats hashtag on twitter over time",
+       caption = "Data from Mike Kearny, distributed via #tidytuesday") + 
+   theme(plot.title = element_text(size=16),
+         axis.title.x = element_text(size=14),
+         axis.title.y = element_text(size=14))
+```
+
 
