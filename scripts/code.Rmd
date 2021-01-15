@@ -21,9 +21,6 @@ library(here)
 library(janitor)
 library(stringr)
 library(forcats)
-#library(bootnet)
-library(qgraph)
-library(igraph)
 library(psych)
 library(nFactors)
 library(Matrix)
@@ -39,10 +36,6 @@ here()
 data = import(here("data", "rstats_tweets.rds"), setclass = "tb_df") %>% 
   characterize() %>% 
   clean_names()
-
-names(data)
-head(data, 3)
-
 ```
 
 ```{r}
@@ -61,12 +54,28 @@ data_short %>%
   ggplot(aes(x = fct_reorder(screen_name, n), y = n))+
   geom_bar(stat = "identity")+
   coord_flip()
+
+
 ```
 
 ## Figure 1 Version 2
 
 ```{r}
 
+data_short %>% 
+  ggplot(aes(x = fct_reorder(screen_name, n), y = n))+
+  geom_bar(stat = "identity", fill = "cornflowerblue")+
+  coord_flip()+
+  labs(x = "Twitter Screen Name",
+       y = "Count",
+       title = "Most prolific #rstats tweeters",
+       subtitle = "Top 25 screennames displayed") +
+  theme_set(theme_minimal())+
+  theme(plot.title = element_text(hjust = -3.4, vjust= 3),                               plot.subtitle = element_text(hjust = -2.2))+
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = calc_element("panel.grid.major.y", theme_get())
+  )
 ```
 
 
