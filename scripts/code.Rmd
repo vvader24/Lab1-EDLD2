@@ -105,10 +105,9 @@ data %>%
 ```{r}
  
 ggplot(data, aes(month, n)) +
-  geom_line(aes(y=n), color = "slategrey", size = 2) +
-  geom_ribbon(aes(ymin=0, ymax = n), fill = "grey89", alpha = 0.7) +
-  geom_smooth(color = "magenta") +
-  #geom_smooth(span = 1, se = FALSE, color = "magenta") +
+  geom_line(aes(y=n), color = "slategrey", size = 1.25) +
+  geom_ribbon(aes(ymin=0, ymax = n), fill = "#96b6e8", alpha = 0.5, color = "slategrey") +
+  geom_smooth(color = "magenta", se = F, size = 1.25) +
   xlim(as_datetime("2008-09-01 00:00:00"), as_datetime("2018-12-31 00:00:00"))+
   theme_minimal() +
   labs(y = "Number of #rstats tweets",
@@ -117,7 +116,8 @@ ggplot(data, aes(month, n)) +
        caption = "Data from Mike Kearny, distributed via #tidytuesday") + 
    theme(plot.title = element_text(size=16),
          axis.title.x = element_text(size=14),
-         axis.title.y = element_text(size=14))
+         axis.title.y = element_text(size=14),
+         axis.text = element_text(size=11))
 
 ```
 
