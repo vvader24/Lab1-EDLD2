@@ -71,7 +71,7 @@ data_short %>%
        y = "Count",
        title = "Most prolific #rstats tweeters",
        subtitle = "Top 25 screennames displayed") +
-  theme_set(theme_minimal())+
+  theme_minimal()+
   theme(plot.title = element_text(hjust = -3.4, vjust= 3),                               plot.subtitle = element_text(hjust = -2.2))+
   theme(
     panel.grid.major.y = element_blank(),
