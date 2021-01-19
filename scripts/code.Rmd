@@ -65,24 +65,32 @@ data_short %>%
 
 data_short %>% 
   ggplot(aes(x = fct_reorder(screen_name, n), y = n))+
-  geom_bar(stat = "identity", fill = "cornflowerblue")+
+  geom_bar(stat = "identity", fill = "cornflowerblue", alpha = 0.9)+
   coord_flip()+
   labs(x = "Twitter Screen Name",
        y = "Count",
        title = "Most prolific #rstats tweeters",
-       subtitle = "Top 25 screennames displayed") +
+       subtitle = "Top 25 screennames displayed",
+       caption = "Data from Mike Kearny, distributed via #tidytuesday") +
   theme_minimal()+
-  theme(plot.title = element_text(hjust = -3.4, vjust= 3),                               plot.subtitle = element_text(hjust = -2.2))+
+  #theme(plot.title = element_text(hjust = -3.4, vjust= 3),                               plot.subtitle = element_text(hjust = -2.2))+
+  theme(plot.title = element_text(hjust = -.39),
+        plot.subtitle = element_text(hjust = -.32))+
   theme(
     panel.grid.major.y = element_blank(),
     panel.grid.major.x = calc_element("panel.grid.major.y", theme_get())
-  )
+  )+ 
+   theme(plot.title = element_text(size=16),
+         axis.title.x = element_text(size=14),
+         axis.title.y = element_text(size=14),
+         axis.text = element_text(size=11),
+         plot.caption = element_text(size=11))
 ```
 
 
 ## Figure 2 Version 1
 
-```{r}
+```{r warning=F, message=F}
 
 data <- data %>%
   mutate(month = round_date(data$created_at, # adding month variable
@@ -102,7 +110,7 @@ data %>%
 
 ## Figure 2 Version 2
 
-```{r}
+```{r warning=F, message=F}
  
 ggplot(data, aes(month, n)) +
   geom_line(aes(y=n), color = "slategrey", size = 1.25) +
@@ -117,7 +125,8 @@ ggplot(data, aes(month, n)) +
    theme(plot.title = element_text(size=16),
          axis.title.x = element_text(size=14),
          axis.title.y = element_text(size=14),
-         axis.text = element_text(size=11))
+         axis.text = element_text(size=11),
+         plot.caption = element_text(size=11))
 
 ```
 
