@@ -4,7 +4,7 @@ author: "vinita vader"
 date: "1/5/2021"
 output: html_document
 editor_options: 
-  chunk_output_type: console
+  chunk_output_type: inline
 ---
 ```{r setup, include=FALSE}
 options(Encoding="UTF-8")
@@ -75,7 +75,7 @@ data_short %>%
   theme_minimal()+
   #theme(plot.title = element_text(hjust = -3.4, vjust= 3),                               plot.subtitle = element_text(hjust = -2.2))+
   theme(plot.title = element_text(hjust = -.39),
-        plot.subtitle = element_text(hjust = -.32))+
+        plot.subtitle = element_text(hjust = -.322))+
   theme(
     panel.grid.major.y = element_blank(),
     panel.grid.major.x = calc_element("panel.grid.major.y", theme_get())
