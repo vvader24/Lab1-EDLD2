@@ -82,11 +82,8 @@ data_short %>%
 
 ## Figure 2 Version 1
 
-## Figure 2 Version 2
-
-
 ```{r}
-#Fig2
+
 data <- data %>%
   mutate(month = round_date(data$created_at, # adding month variable
                             unit = "month"))
@@ -95,15 +92,18 @@ data <- data %>%
   mutate(n = n()) # create count variable
 
 data %>% 
-  select(month, n) # taking a look
-
-data %>% 
   ggplot(aes(x = month, y = n)) +
   geom_line() +
   geom_smooth() +
   xlim(as_datetime("2008-09-01 00:00:00"), as_datetime("2018-12-31 00:00:00"))
 
-#Fig2.2  
+```
+
+
+## Figure 2 Version 2
+
+```{r}
+ 
 ggplot(data, aes(month, n)) +
   geom_line(aes(y=n), color = "slategrey", size = 2) +
   geom_ribbon(aes(ymin=0, ymax = n), fill = "grey89", alpha = 0.7) +
@@ -118,6 +118,7 @@ ggplot(data, aes(month, n)) +
    theme(plot.title = element_text(size=16),
          axis.title.x = element_text(size=14),
          axis.title.y = element_text(size=14))
+
 ```
 
 
