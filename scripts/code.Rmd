@@ -51,7 +51,6 @@ data_short %>%
   geom_bar(stat = "identity")+
   coord_flip()
 
-
 ```
 
 ## Plot 1 Version 2
@@ -68,18 +67,18 @@ data_short %>%
        subtitle = "Top 25 screennames displayed",
        caption = "Data from Mike Kearny, distributed via #tidytuesday") +
   theme_minimal()+
-  #theme(plot.title = element_text(hjust = -3.4, vjust= 3),                               plot.subtitle = element_text(hjust = -2.2))+
-  theme(plot.title = element_text(hjust = -.39),
-        plot.subtitle = element_text(hjust = -.322))+
+  theme(plot.title = element_text(hjust = -.66),
+        plot.subtitle = element_text(hjust = -.62))+
   theme(
     panel.grid.major.y = element_blank(),
     panel.grid.major.x = calc_element("panel.grid.major.y", theme_get())
   )+ 
-   theme(plot.title = element_text(size=16),
-         axis.title.x = element_text(size=14),
-         axis.title.y = element_text(size=14),
-         axis.text = element_text(size=11),
-         plot.caption = element_text(size=11))
+   theme(plot.title = element_text(size=20),
+         plot.subtitle = element_text(size = 18),
+         axis.title.x = element_text(size=16),
+         axis.title.y = element_text(size=16),
+         axis.text = element_text(size=13),
+         plot.caption = element_text(size=13))
 ```
 
 
@@ -90,15 +89,12 @@ data_short %>%
 data <- data %>%
   mutate(month = round_date(data$created_at, # adding month variable
                             unit = "month"))
-data <- data %>% 
-  group_by(month) %>% 
-  mutate(n = n()) # create count variable
 
 data %>% 
+  count(month) %>% 
   ggplot(aes(x = month, y = n)) +
   geom_line() +
-  geom_smooth(method="glm", 
-              method.args=list(family=gaussian(link="log"))) +
+  geom_smooth() +
   xlim(as_datetime("2008-09-01 00:00:00"), as_datetime("2018-12-31 00:00:00"))
 
 ```
@@ -108,12 +104,12 @@ data %>%
 
 ```{r warning=F, message=F}
  
-ggplot(data, aes(month, n)) +
+data %>% 
+  count(month) %>% 
+  ggplot(aes(x = month, y = n)) +
   geom_line(aes(y=n), color = "gray28", size = 1.25) +
   geom_ribbon(aes(ymin=0, ymax = n), fill = "#96b6e8", alpha = 0.5, color = "gray28") +
-  geom_smooth(color = "magenta", se = F, size = 1.25,
-              method="glm", 
-              method.args=list(family=gaussian(link="log"))) +
+  geom_smooth(color = "magenta", se = F, size = 1.25) +
   xlim(as_datetime("2008-09-01 00:00:00"), as_datetime("2018-12-31 00:00:00"))+
   theme_minimal() +
   labs(y = "Number of #rstats tweets",
@@ -128,5 +124,4 @@ ggplot(data, aes(month, n)) +
   theme(plot.title = element_text(hjust = -.9))
 
 ```
-
 
