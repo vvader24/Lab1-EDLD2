@@ -26,7 +26,7 @@ library(lubridate)
 here::here()
 ```
 
-## Figure 1 Version 1
+## Plot 1 Version 1
 
 ```{r}
 data = import(here::here("data", "rstats_tweets.rds"), setclass = "tb_df") %>% 
@@ -54,7 +54,7 @@ data_short %>%
 
 ```
 
-## Figure 1 Version 2
+## Plot 1 Version 2
 
 ```{r}
 
@@ -83,7 +83,7 @@ data_short %>%
 ```
 
 
-## Figure 2 Version 1
+## Plot 2 Version 1
 
 ```{r warning=F, message=F}
 
@@ -97,31 +97,35 @@ data <- data %>%
 data %>% 
   ggplot(aes(x = month, y = n)) +
   geom_line() +
-  geom_smooth() +
+  geom_smooth(method="glm", 
+              method.args=list(family=gaussian(link="log"))) +
   xlim(as_datetime("2008-09-01 00:00:00"), as_datetime("2018-12-31 00:00:00"))
 
 ```
 
 
-## Figure 2 Version 2
+## Plot 2 Version 2
 
 ```{r warning=F, message=F}
  
 ggplot(data, aes(month, n)) +
-  geom_line(aes(y=n), color = "slategrey", size = 1.25) +
-  geom_ribbon(aes(ymin=0, ymax = n), fill = "#96b6e8", alpha = 0.5, color = "slategrey") +
-  geom_smooth(color = "magenta", se = F, size = 1.25) +
+  geom_line(aes(y=n), color = "gray28", size = 1.25) +
+  geom_ribbon(aes(ymin=0, ymax = n), fill = "#96b6e8", alpha = 0.5, color = "gray28") +
+  geom_smooth(color = "magenta", se = F, size = 1.25,
+              method="glm", 
+              method.args=list(family=gaussian(link="log"))) +
   xlim(as_datetime("2008-09-01 00:00:00"), as_datetime("2018-12-31 00:00:00"))+
   theme_minimal() +
   labs(y = "Number of #rstats tweets",
        x = "Year (data summarized by month)",
        title = "Growth of the #rstats hashtag on twitter over time",
        caption = "Data from Mike Kearny, distributed via #tidytuesday") + 
-   theme(plot.title = element_text(size=16),
-         axis.title.x = element_text(size=14),
-         axis.title.y = element_text(size=14),
-         axis.text = element_text(size=11),
-         plot.caption = element_text(size=11))
+   theme(plot.title = element_text(size=20),
+         axis.title.x = element_text(size=16),
+         axis.title.y = element_text(size=16),
+         axis.text = element_text(size=13),
+         plot.caption = element_text(size=13)) +
+  theme(plot.title = element_text(hjust = -.9))
 
 ```
 
