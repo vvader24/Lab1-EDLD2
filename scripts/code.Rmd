@@ -51,7 +51,6 @@ data_short %>%
   geom_bar(stat = "identity")+
   coord_flip()
 
-
 ```
 
 ## Plot 1 Version 2
@@ -79,6 +78,7 @@ data_short %>%
          axis.title.y = element_text(size=14),
          axis.text = element_text(size=11),
          plot.caption = element_text(size=11))
+
 ```
 
 
@@ -89,15 +89,12 @@ data_short %>%
 data <- data %>%
   mutate(month = round_date(data$created_at, # adding month variable
                             unit = "month"))
-data <- data %>% 
-  group_by(month) %>% 
-  mutate(n = n()) # create count variable
 
 data %>% 
+  count(month) %>% 
   ggplot(aes(x = month, y = n)) +
   geom_line() +
-  geom_smooth(method="glm", 
-              method.args=list(family=gaussian(link="log"))) +
+  geom_smooth() +
   xlim(as_datetime("2008-09-01 00:00:00"), as_datetime("2018-12-31 00:00:00"))
 
 ```
@@ -107,12 +104,12 @@ data %>%
 
 ```{r warning=F, message=F}
  
-ggplot(data, aes(month, n)) +
+data %>% 
+  count(month) %>% 
+  ggplot(aes(x = month, y = n)) +
   geom_line(aes(y=n), color = "gray28", size = 1.25) +
   geom_ribbon(aes(ymin=0, ymax = n), fill = "#96b6e8", alpha = 0.5, color = "gray28") +
-  geom_smooth(color = "magenta", se = F, size = 1.25,
-              method="glm", 
-              method.args=list(family=gaussian(link="log"))) +
+  geom_smooth(color = "magenta", se = F, size = 1.25) +
   xlim(as_datetime("2008-09-01 00:00:00"), as_datetime("2018-12-31 00:00:00"))+
   theme_minimal() +
   labs(y = "Number of #rstats tweets",
@@ -127,5 +124,4 @@ ggplot(data, aes(month, n)) +
   theme(plot.title = element_text(hjust = -.9))
 
 ```
-
 
