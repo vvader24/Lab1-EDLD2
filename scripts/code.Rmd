@@ -4,7 +4,7 @@ author: "Ann-Marie Barrett, Raleigh Goodwin, Kavya Mudiam, Zachary Schroeder,  V
 date: "January 2021"
 output: html_document
 editor_options: 
-  chunk_output_type: console
+  chunk_output_type: inline
 ---
 ```{r setup, include=FALSE}
 options(Encoding="UTF-8")
@@ -67,17 +67,17 @@ data_short %>%
        subtitle = "Top 25 screennames displayed",
        caption = "Data from Mike Kearny, distributed via #tidytuesday") +
   theme_minimal()+
-  #theme(plot.title = element_text(hjust = -3.4, vjust= 3),                               plot.subtitle = element_text(hjust = -2.2))+
-  theme(plot.title = element_text(hjust = -.39),
-        plot.subtitle = element_text(hjust = -.322))+
+  theme(plot.title = element_text(hjust = -.66),
+        plot.subtitle = element_text(hjust = -.62))+
   theme(panel.grid.major.y = element_blank(),
         panel.grid.minor = element_blank(),
         panel.grid.major.x = element_line(colour="gray", size=0.7))+ 
-   theme(plot.title = element_text(size=16),
-         axis.title.x = element_text(size=14),
-         axis.title.y = element_text(size=14),
-         axis.text = element_text(size=11),
-         plot.caption = element_text(size=11))
+   theme(plot.title = element_text(size=20),
+         plot.subtitle = element_text(size = 18),
+         axis.title.x = element_text(size=16),
+         axis.title.y = element_text(size=16),
+         axis.text = element_text(size=13),
+         plot.caption = element_text(size=13))
 
 ```
 
