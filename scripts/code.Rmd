@@ -1,7 +1,7 @@
 ---
-title: "Lab 1"
-author: "vinita vader"
-date: "1/5/2021"
+title: "EDLD 2 - Lab 1"
+author: "Ann-Marie Barrett, Raleigh Goodwin, Kavya Mudiam, Zachary Schroeder,  Vinita Vader"
+date: "January 2021"
 output: html_document
 editor_options: 
   chunk_output_type: inline
@@ -21,14 +21,9 @@ library(here)
 library(janitor)
 library(stringr)
 library(forcats)
-library(psych)
-library(nFactors)
-library(Matrix)
 library(ggplot2)
 library(lubridate)
 here::here()
-
-
 ```
 
 ## Figure 1 Version 1
